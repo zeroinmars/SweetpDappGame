@@ -45,7 +45,7 @@ public class Enemy : LivingEntity
 
 
         float targetRadius = 1.5f;
-        float targetRange =0.5f;
+        float targetRange =0f;
     RaycastHit[] rayHits =
             Physics.SphereCastAll(transform.position,
             targetRadius,
