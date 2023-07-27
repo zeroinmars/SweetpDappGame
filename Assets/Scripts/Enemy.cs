@@ -19,7 +19,6 @@ public class Enemy : LivingEntity
 
     private bool isChase = true;
     private bool isAttack = false;
-    private bool isMissTarget = false;
     public float damage = 10f;
     public float timeBetAttack = 5.5f;
     private float lastAttackTime;

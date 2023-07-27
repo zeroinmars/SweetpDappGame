@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
     public static GameManager instance
     {
+        
         get
         {
             // 만약 싱글톤 변수에 아직 오브젝트가 할당되지 않았다면
@@ -21,29 +22,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject spawnUIPanel;
-    public bool isUI= false;
+    public bool IsUI= false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //weapon check
+
+        if (WeaponManager.instance.weaponDataList[0] != null)
+        {
+            WeaponManager.instance.EquipWeapon(WeaponManager.instance.weaponDataList[0]);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (isUI == false)
-            {
-                isUI = true;
-                spawnUIPanel.SetActive(true);
-            }
-            else
-            {
-                isUI = false;
-                spawnUIPanel.SetActive(false);
-            }
-        }
+       
     }
 }

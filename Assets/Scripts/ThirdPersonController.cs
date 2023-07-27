@@ -162,6 +162,7 @@ namespace StarterAssets
 
             if (isAttackDirection)
                 return;
+            
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -185,13 +186,37 @@ namespace StarterAssets
 
         private void Attack()
         {
-            if (_hasAnimator && Grounded && !isJump && !isAttack && _input.attack)
+            if (PlayerAttack.instance.IsWeaponEquip == false)
+                return;
+            //Simulation
+            if (SimulationManager.instance != null)
             {
-                _controller.Move(Vector3.zero);
-                _animator.SetTrigger(_animIDAttack);
-                isAttack = true;
-                isAttackDirection = true;
+                if (SimulationManager.instance.isUI)
+                    return;
+
+                if (_hasAnimator && Grounded && !isJump && !isAttack && _input.attack)
+                {
+                    _controller.Move(Vector3.zero);
+                    _animator.SetTrigger(_animIDAttack);
+                    isAttack = true;
+                    isAttackDirection = true;
+                }
             }
+            else
+            {
+                //Game
+                if (GameManager.instance.IsUI)
+                    return;
+
+                if (_hasAnimator && Grounded && !isJump && !isAttack && _input.attack)
+                {
+                    _controller.Move(Vector3.zero);
+                    _animator.SetTrigger(_animIDAttack);
+                    isAttack = true;
+                    isAttackDirection = true;
+                }
+            }
+            
         }
 
         private void EndAttack()

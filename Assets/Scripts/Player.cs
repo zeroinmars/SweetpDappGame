@@ -2,6 +2,19 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : LivingEntity
 {
+    private static Player _instance;
+    public static Player instance
+    {
+        get
+        {
+            if(_instance == null)
+            {
+                _instance = FindObjectOfType<Player>();
+            }
+            return _instance;
+        }
+    }
+
     public Slider healthSlider;
     public AudioClip deathClip;
     public AudioClip hitClip;
@@ -25,6 +38,13 @@ public class Player : LivingEntity
         healthSlider.maxValue = startingHealth;
         healthSlider.value = health;
 
+    }
+
+    public void ChangeHealthWithWeapon()
+    {
+        health = WeaponManager.instance.curruentWeaponData.weapon_hp;
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
     }
 
     // 체력 회복
