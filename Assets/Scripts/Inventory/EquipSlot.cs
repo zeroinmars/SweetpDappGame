@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 public class EquipSlot : MonoBehaviour
+    ,IPointerEnterHandler
+    ,IPointerExitHandler
 {
 
     public WeaponData weaponData;
@@ -85,6 +88,17 @@ public class EquipSlot : MonoBehaviour
         SetColor(0);
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(weaponData.weapon_id !=0)
+        UIManager.instance.OpenWeaponInfoPanel(equipSlot);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (weaponData.weapon_id != 0)
+            UIManager.instance.CloseWeaponInfoPanel();
+    }
 
     // Start is called before the first frame update
     void Start()

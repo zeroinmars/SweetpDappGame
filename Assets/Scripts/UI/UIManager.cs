@@ -22,18 +22,49 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public GameObject Inventory;
     private bool IsInventory = false;
 
+    [Header("Inventory")]
+    public GameObject Inventory;
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI jewelText;
+
+    [Header("Weapon Select Panel")]
     public GameObject WeaponSelectPanel;
+
+    [Header("Weapon Info Panel")]
+    public GameObject WeaponInfoPanel;
+    public TextMeshProUGUI weaponNameText;
+    public TextMeshProUGUI weaponLevelText;
+    public TextMeshProUGUI weaponATKText;
+    public TextMeshProUGUI weaponHPText;
+    public TextMeshProUGUI weaponNatureText;
+    public TextMeshProUGUI weaponDurText;
+    public Image WeaponImage;
 
     private EquipSlot equipSlot;
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public void OpenWeaponInfoPanel(EquipSlot _equipSlot)
+    {
+        equipSlot = _equipSlot;
+        weaponNameText.text = equipSlot.weaponData.weapon_id.ToString();
+        weaponLevelText.text = equipSlot.weaponData.weapon_upgrade.ToString();
+        weaponATKText.text = equipSlot.weaponData.weapon_atk.ToString();
+        weaponHPText.text = equipSlot.weaponData.weapon_hp.ToString();
+        weaponNatureText.text = equipSlot.weaponData.weapon_element.ToString();
+        weaponDurText.text = equipSlot.weaponData.weapon_durability.ToString();
+        WeaponImage.sprite = equipSlot.itemImage.sprite;
+        WeaponInfoPanel.SetActive(true);
+    }
+
+    public void CloseWeaponInfoPanel()
+    {
+        WeaponInfoPanel.SetActive(false);
     }
 
     public void OpenWeaponSelectPanel(EquipSlot _equipSlot)
